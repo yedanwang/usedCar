@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//WebContent/index.jsp=UTF-8
+encoding//WebContent/sale.jsp=UTF-8
+encoding//src/org/servlet/RegisterServlet.java=UTF-8
+encoding//src/org/servlet/loginServlet.java=UTF-8
