@@ -69,6 +69,10 @@
     		background-position: -106px 0;
     		margin: auto;
     	}
+    	#carImg{
+    		background-position: -106px 0;
+    		margin: auto;
+    	}
     	input[type=file]{
     		display: none;
     	}
@@ -118,44 +122,44 @@
 				<td><input type="file" name="drivingBookImg" required /><div id="drivingBookDiv"><div id="drivingBook" class="hoverToPointer inputFileIcon"></div></div></td>
 			</tr>
 			<tr>
-				<td>发动机证</td>
+				<td><span class="required">*</span> 发动机证</td>
 				<td></td>
 				<td><input type="file" name="engineImg" required/><div id="engineImgDiv"><div id="engineImg" class="hoverToPointer inputFileIcon"></div></div></td>
 			</tr>
 			<tr>
-				<td>购买时间</td>
+				<td><span class="required">*</span>汽车照片</td>
+				<td></td>
+				<td><input type="file" name="carImg" required/><div id="carImgDiv"><div id="carImg" class="hoverToPointer inputFileIcon"></div></div></td>
+			</tr>
+			<tr>
+				<td><span class="required">*</span>汽车品牌</td>
+				<td></td>
+				<td><input type="text" name="carBrand" required/></td>
+			</tr>
+			<tr>
+				<td><span class="required">*</span> 购买时间</td>
 				<td></td>
 				<td><input type="date" name="buyTime" required/></td>
 			</tr>
 			<tr>
-				<td>车型</td>
+				<td><span class="required">*</span> 车型</td>
 				<td></td>
 				<td><input type="text" name="vehicleType" list="carList" required/></td>
 			</tr>
 			<tr>
-				<td>里程</td>
+				<td><span class="required">*</span> 里程</td>
 				<td></td>
 				<td><input type="number" name="mileage" pattern="\d{0,}" required/>万公里</td>
 			</tr>
 			<tr>
-				<td>价格</td>
+				<td><span class="required">*</span> 价格</td>
 				<td></td>
 				<td><input type="number" step="0.1" name="price" required/> 万元</td>
 			</tr>
 			<tr>
-				<td>地址</td>
-				<td></td>
-				<td><textarea name="address" required></textarea></td>
-			</tr>
-			<tr>
-				<td>车况描述</td>
+				<td><span class="required">*</span> 车况描述</td>
 				<td></td>
 				<td><textarea name="condition" required placeholder="我的车外观有无剐蹭喷漆、发动机、变速箱有无故障、电子系统是否正常"></textarea></td>
-			</tr>
-			<tr>
-				<td>联系方式</td>
-				<td></td>
-				<td><input name="iphone" type="text" pattern="1[34578]\d{9}" required></td>
 			</tr>
 		</table>
 		<datalist id="carList">
@@ -200,6 +204,20 @@ engineImgInput.onchange = function() {
 	reader.readAsDataURL(this.files[0]);
 	reader.onload=function(e) {
 		engineImgIcon.innerHTML = '<img src="'+e.target.result+'" width="96" height="90px"/>'
+	}
+}
+
+let carImgInput = document.getElementsByName("carImg")[0];
+let carImgIcon = document.getElementById('carImg');
+carImgIcon.onclick = function(){
+	carImgInput.click();
+}
+carImgInput.onchange = function() {
+	carImgIcon.className = 'hoverToPointer inputFileWithoutIcon';
+	let reader = new FileReader();
+	reader.readAsDataURL(this.files[0]);
+	reader.onload=function(e) {
+		carImgIcon.innerHTML = '<img src="'+e.target.result+'" width="96" height="90px"/>'
 	}
 }
 </script>

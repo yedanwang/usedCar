@@ -14,10 +14,10 @@ public class SqlSaleCar {
 	public Boolean IsSaleInfo(Car car) throws SQLException
 	{
 		Connection conn = Te.conn;
-		String sqlInsert = "insert into  car (id,buy_time,vehicle_type," +
-				"mileage,price,status,address,condition," +
-				"iphone) values("+car.getId()+","+"'"+car.getBuy_time()+"'"+","
-				+"'"+car.getVehicle_type()+"'"+","+car.getMileage()+","+car.getPrice()+","+car.getStatus()+","+"'"+car.getAdress()+"'"+","+"'"+car.getCondition()+"'"+","+car.getIphone()+")";
+		String sqlInsert = "insert into  car (name,buy_time,vehicle_type," +
+				"mileage,price,status,condition," +
+				"car_brand) values('"+car.getName()+"',"+"'"+car.getBuy_time()+"'"+","
+				+"'"+car.getVehicle_type()+"'"+","+car.getMileage()+","+car.getPrice()+","+car.getStatus()+","+"'"+car.getCondition()+"'"+",'"+car.getCar_brand()+"')";
 		 System.out.print(sqlInsert);
 		 Statement statement;
 		 statement = conn.createStatement();

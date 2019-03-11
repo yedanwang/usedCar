@@ -46,6 +46,19 @@ public class selectAllCarServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		 SqlSelectCar t = new SqlSelectCar();
+	        List<Car> carList = null;
+			try {
+		    
+				carList = t.selectOrderCar((String)request.getAttribute("search"));
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			request.setAttribute("carList", carList);
+			request.getRequestDispatcher("error.jsp").forward(request, response);
 		
        
 	}
@@ -63,19 +76,7 @@ public class selectAllCarServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-	        SqlSelectCar t = new SqlSelectCar();
-	        List<Car> carList = null;
-			try {
-		    
-				carList = t.selectALLCar();
-				
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			request.setAttribute("carList", carList);
-			request.getRequestDispatcher("error.jsp").forward(request, response);
+	       
 	}
 
 	

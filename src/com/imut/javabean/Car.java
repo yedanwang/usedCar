@@ -1,7 +1,7 @@
 package com.imut.javabean;
 
 public class Car {
-	  private String  id;
+	  private String  name;
 	  private String  driving_book_img ;
       private String  engine_img ;
       private String  buy_time ;
@@ -12,6 +12,7 @@ public class Car {
       private String address; 
       private String condition;
       private String iphone;
+      private String car_brand;
       public void set(String attr, String value) {
     	  switch(attr) {
     	  	case "vehicleType": 
@@ -31,18 +32,19 @@ public class Car {
     	  	case"iphone":
     	  		iphone = value;break;
     	  	case"id":
-    	  		id = value;break;
-    	  		
+    	  		name = value;break;
+    	  	case"carBrand":
+    	  		car_brand = value;break;
     	  		
     	  }
       }
-      public String getId()
+      public String getName()
   	{
-  		return id;
+  		return name;
   	}
-      public void setId( String id )
+      public void setName( String id )
   	{
-  		this.id = id;
+  		this.name = id;
   	}
 
       public String getDriving_book_img()
@@ -125,4 +127,12 @@ public class Car {
       	{
       		this.iphone = iphone;
       	}
+          public String getCar_brand()
+        	{
+        		return car_brand;
+        	}
+            public void setCar_brand( String car_brand )
+        	{
+        		this.car_brand = car_brand;
+        	}
 }

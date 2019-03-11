@@ -1,12 +1,14 @@
 package org.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.hb.dao.SqlLogin;
 import com.hb.dao.SqlRegister;
@@ -59,15 +61,20 @@ import com.imut.javabean.Users;
 		 */
 		public void doPost(HttpServletRequest request, HttpServletResponse response)
 				throws ServletException, IOException {
-
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("text/html;charset = utf-8");
 			    String loginName = request.getParameter("loginName").trim();
 		        String password = request.getParameter("password");
-		     
+		        String phone = request.getParameter("phone");
+		        String address = request.getParameter("address");
 		        SqlRegister r = new SqlRegister();
 				try {
-					if(r.IsRegister(loginName, password))
+					if(r.IsRegister(loginName, password, phone, address))
 					{
-						response.sendRedirect("index.jsp");	//閿熸枻鎷疯瘉閿熺即鐧告嫹閿熸枻鎷疯浆閿熸枻鎷烽敓鏂ゆ嫹杩庨敓鏂ゆ嫹椤� main.jsp
+						HttpSession session = request.getSession();
+						session.setAttribute("loginName", loginName);
+						PrintWriter pw = response.getWriter();
+						pw.println("<script>alert('注册成功'); location.href='../../UsedCar/index.jsp';</script>");
 					}
 					
 					else

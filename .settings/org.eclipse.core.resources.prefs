@@ -1,5 +1,8 @@
 eclipse.preferences.version=1
+encoding//WebContent/admin/picture-list.jsp=UTF-8
+encoding//WebContent/admin/static/h-ui.admin/js/de_DE.txt=UTF-8
 encoding//WebContent/index.jsp=UTF-8
 encoding//WebContent/sale.jsp=UTF-8
+encoding//WebContent/search.jsp=UTF-8
 encoding//src/org/servlet/RegisterServlet.java=UTF-8
 encoding//src/org/servlet/loginServlet.java=UTF-8

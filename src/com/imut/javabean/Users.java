@@ -1,15 +1,46 @@
 package com.imut.javabean;
 
 public class Users {
-	private String id ;
+	
 	private String password;
 	private String name;
 	private String headimg;
-	
-	public String getId()
+	private int dark;
+	private String phone;
+	private String address;
+	private String time;
+	public String getAddress()
 	{
-		return id;
+		return address;
 	}
+    public void setAddress(String na)
+	{
+		  address = na;
+	 }
+    public String getTime()
+	{
+		return time;
+	}
+    public void setTime(String na)
+	{
+		  time = na;
+	 }
+	public int getDarke()
+	{
+		return dark;
+	}
+    public void setDark(int na)
+	{
+		  dark = na;
+	 }
+    public String getPhone()
+	{
+		return phone;
+	}
+    public void setPhone(String na)
+	{
+    	phone = na;
+	 }
 	public String getname()
 	{
 		return name;
@@ -22,10 +53,7 @@ public class Users {
 	{
 		return password;
 	}
-	public void setId( String id )
-	{
-		this.id = id;
-	}
+	
     public void setName(String na)
     {
     	name = na;

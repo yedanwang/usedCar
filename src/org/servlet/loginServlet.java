@@ -62,7 +62,8 @@ public class loginServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html;charset = utf-8");
 		    String loginName = request.getParameter("loginName").trim();
 	        String password = request.getParameter("password");
 	     System.out.println("用户名和密码分别为："+loginName+","+password);
@@ -81,9 +82,9 @@ public class loginServlet extends HttpServlet {
 				
 				else
 				{
-				    response.sendRedirect("login.jsp");
+					PrintWriter pw = response.getWriter();
+					pw.println("<script>alert('用户名或密码错误，请检查'); location.href='../../UsedCar/login.jsp';</script>");
 				}
-				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

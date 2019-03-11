@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
@@ -68,15 +69,14 @@ public class PictureServlet extends HttpServlet {
 						String fileFieldName = item.getFieldName();
 						String fileName = item.getName();
 						// 获取文件内容
-						String path = "F:\\tmp";
+						String path = "F:\\eclipse\\UsedCar\\WebContent\\upload";
 						File file = new File(path,loginName + '_' + fileFieldName+".jpg");
 						item.write(file);
 						System.out.print("文件上传出成");
-//						System.out.print(fileFieldName);
-
 					}
-					
 				}
+				PrintWriter pw = response.getWriter();
+				pw.println("<script>alert('提交成功！请等待审核'); location.href='../../UsedCar/index.jsp';</script>");
 			} else {
 				System.out.print("表单传输编码错误，系统退出");
 				return;
@@ -88,7 +88,7 @@ public class PictureServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 				
-		car.setId((String)session.getAttribute("loginName"));		
+		car.setName((String)session.getAttribute("loginName"));		
 		car.setStatus("0");
 		 SqlSaleCar s = new SqlSaleCar();
 		 try {

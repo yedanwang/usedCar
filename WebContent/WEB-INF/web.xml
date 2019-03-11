@@ -55,4 +55,25 @@
 	<servlet-name>selectAllCarServlet</servlet-name>	     <!-- 与servlet相对应 -->
 	<url-pattern>/selectAllCarServlet</url-pattern>   <!-- 页面的映射路径 -->
 </servlet-mapping>
+
+<servlet>				   <!-- 定义servlet -->
+	<servlet-name>loginAdminServlet</servlet-name>	   <!-- 与servlet-mapping对应 -->
+	<servlet-class>	org.servlet.loginAdminServlet</servlet-class>	
+   </servlet>
+<servlet-mapping>			     <!-- 映射路径 -->
+	<servlet-name>loginAdminServlet</servlet-name>	     <!-- 与servlet相对应 -->
+	<url-pattern>/loginAdminServlet</url-pattern>   <!-- 页面的映射路径 -->
+</servlet-mapping>
+
+
+
+<servlet>				   <!-- 定义servlet -->
+	<servlet-name>updateCarStatusServlet</servlet-name>	   <!-- 与servlet-mapping对应 -->
+	<servlet-class>	org.servlet.updateCarStatusServlet</servlet-class>	
+   </servlet>
+<servlet-mapping>			     <!-- 映射路径 -->
+	<servlet-name>updateCarStatusServlet</servlet-name>	     <!-- 与servlet相对应 -->
+	<url-pattern>/updateCarStatusServlet</url-pattern>   <!-- 页面的映射路径 -->
+</servlet-mapping>
+
 </web-app>
