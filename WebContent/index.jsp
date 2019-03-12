@@ -168,7 +168,7 @@ footer{
 		  <div class="swiper-pagination"></div>
 		</div>
 		<div class="column-title">
-			文案1
+			
 		</div>
 		<div class="car-content">
 		<%

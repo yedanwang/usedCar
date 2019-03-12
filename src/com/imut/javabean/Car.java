@@ -71,68 +71,68 @@ public class Car {
    	{
        	this.buy_time = buy_time;
    	}
-       public String getVehicle_type()
-      	{
-          	return vehicle_type;
-      	}
-          public void setVehicle_type( String vehicle_type )
-      	{
-          	this.vehicle_type = vehicle_type;
-      	}  
-          public float getMileage()
-        {
-             return mileage;
-        }
-          public void setMileage( float mileage )
-        {
-             this.mileage = mileage;
-        }          
-           public float getPrice()
-       	{
-             return price;
-       	}
-           public void setPrice( float price )
-        {
-             this.price = price;
-        }      
-           public String getStatus()
-        {
-             return status;
-        }
-           public void setStatus( String status )
-        {
-            this.status = status;
-        }
-          public String getAdress()
-        {
-         	return address;
-        }
-          public void setAdress( String address )
-        {
-         	this.address = address;
-         }
-       public String getCondition()
-     	{
-     		return condition;
-     	}
-         public void setCondition( String condition )
-     	{
-     		this.condition = condition;
-     	}
-         public String getIphone()
-      	{
-      		return iphone;
-      	}
-          public void setIphone( String iphone )
-      	{
-      		this.iphone = iphone;
-      	}
-          public String getCar_brand()
-        	{
-        		return car_brand;
-        	}
-            public void setCar_brand( String car_brand )
-        	{
-        		this.car_brand = car_brand;
-        	}
+    public String getVehicle_type()
+  	{
+      	return vehicle_type;
+  	}
+      public void setVehicle_type( String vehicle_type )
+  	{
+      	this.vehicle_type = vehicle_type;
+  	}  
+      public float getMileage()
+    {
+         return mileage;
+    }
+      public void setMileage( float mileage )
+    {
+         this.mileage = mileage;
+    }          
+       public float getPrice()
+   	{
+         return price;
+   	}
+       public void setPrice( float price )
+    {
+         this.price = price;
+    }      
+       public String getStatus()
+    {
+         return status;
+    }
+       public void setStatus( String status )
+    {
+        this.status = status;
+    }
+      public String getAdress()
+    {
+     	return address;
+    }
+    public void setAdress( String address )
+    {
+     	this.address = address;
+    }
+    public String getCondition()
+ 	{
+ 		return condition;
+ 	}
+     public void setCondition( String condition )
+ 	{
+ 		this.condition = condition;
+ 	}
+     public String getIphone()
+  	{
+  		return iphone;
+  	}
+      public void setIphone( String iphone )
+  	{
+  		this.iphone = iphone;
+  	}
+    public String getCar_brand()
+	{
+		return car_brand;
+	}
+    public void setCar_brand( String car_brand )
+	{
+		this.car_brand = car_brand;
+	}
 }

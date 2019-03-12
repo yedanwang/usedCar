@@ -1,0 +1,3 @@
+git add . 
+git commit -m "ÖÐÆÚ¼ì²é"
+git push
