@@ -65,6 +65,14 @@
 	<url-pattern>/loginAdminServlet</url-pattern>   <!-- 页面的映射路径 -->
 </servlet-mapping>
 
+<servlet>				   <!-- 定义servlet -->
+	<servlet-name>selectChatServlet</servlet-name>	   <!-- 与servlet-mapping对应 -->
+	<servlet-class>	org.servlet.selectChatServlet</servlet-class>	
+   </servlet>
+<servlet-mapping>			     <!-- 映射路径 -->
+	<servlet-name>selectChatServlet</servlet-name>	     <!-- 与servlet相对应 -->
+	<url-pattern>/selectChatServlet</url-pattern>   <!-- 页面的映射路径 -->
+</servlet-mapping>
 
 
 <servlet>				   <!-- 定义servlet -->
@@ -75,5 +83,7 @@
 	<servlet-name>updateCarStatusServlet</servlet-name>	     <!-- 与servlet相对应 -->
 	<url-pattern>/updateCarStatusServlet</url-pattern>   <!-- 页面的映射路径 -->
 </servlet-mapping>
+
+
 
 </web-app>

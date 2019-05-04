@@ -13,7 +13,7 @@ import com.imut.javabean.Car;
 public class SqlSelectCar {
 	public List selectALLCar() throws SQLException {
 		Connection conn = Te.conn;
-		String sql = "SELECT car.name,buy_time,vehicle_type,mileage,price,address,condition,phone,car_brand FROM car,users where users.name=car.name and status = '1'";
+		String sql = "SELECT car.name,buy_time,vehicle_type,mileage,price,address,condition,phone,car_brand,id FROM car,users where users.name=car.name and status = '1'";
 			System.out.print(sql);
 			Statement statement;
 			
@@ -34,6 +34,8 @@ public class SqlSelectCar {
 					car.setCondition(rs.getString(7));
 					car.setIphone(rs.getString(8));
 					car.setCar_brand(rs.getString(9));
+					car.setId( Integer.parseInt(rs.getString(10)));
+					System.out.print("ID="+car.getId());
 					carList.add(car);
 				}	
 				
@@ -142,4 +144,28 @@ public class SqlSelectCar {
 		return carList;			
 
 }	
+	
+	public Car selectCarDetail(String str) throws SQLException { //ÐèÒª¸Äsql
+		Connection conn = Te.conn;
+		String [] s = str.split("=");
+		String sql = "SELECT car.name,buy_time,vehicle_type,mileage,price,address,condition,phone,car_brand,id FROM car,users where users.name=car.name and id = '"+s[1]+"'"; 
+		System.out.print(sql);
+		Statement statement;
+		statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		Car car = new Car();
+		while(rs.next()) {
+			car.setName(rs.getString(1));
+			car.setBuy_time(rs.getString(2));
+			car.setVehicle_type(rs.getString(3));
+			car.setMileage(Float.parseFloat ( rs.getString(4)));
+			car.setPrice(Float.parseFloat( rs.getString(5)));
+			car.setAdress(rs.getString(6));
+			car.setCondition(rs.getString(7));
+			car.setIphone(rs.getString(8));
+			car.setCar_brand(rs.getString(9));
+			car.setId( Integer.parseInt(rs.getString(10)));		
+	    }
+		return car;	
+}
 }

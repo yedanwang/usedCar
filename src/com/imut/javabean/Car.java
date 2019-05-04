@@ -13,6 +13,7 @@ public class Car {
       private String condition;
       private String iphone;
       private String car_brand;
+      private int id;
       public void set(String attr, String value) {
     	  switch(attr) {
     	  	case "vehicleType": 
@@ -38,6 +39,14 @@ public class Car {
     	  		
     	  }
       }
+      public int getId()
+    	{
+    		return id;
+    	}
+      public void setId(int id)
+  	{
+    	  this.id = id;
+  	}
       public String getName()
   	{
   		return name;

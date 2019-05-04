@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-public class loginServlet extends HttpServlet {
+public class selectChatServlet extends HttpServlet {
 
 	
-	public loginServlet() {
+	public selectChatServlet() {
 		super();
 	}
 
@@ -39,33 +39,34 @@ public class loginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset = utf-8");
-		    String loginName = request.getParameter("loginName").trim();
-	        String password = request.getParameter("password");
-	     System.out.println("用户名和密码分别为："+loginName+","+password);
-	        SqlLogin t = new SqlLogin();
-	        Users u;
+		response.setContentType("application/json;charset = utf-8");
+		HttpSession session = request.getSession();
+		SqlSelectChat c = new SqlSelectChat();
+		 List<Chat> chatList = null;
+		 PrintWriter pw = response.getWriter();
 			try {
-				u = t.checkLogin(loginName, password);
-				if(u!=null)
-				{
-					HttpSession session = request.getSession();
-					session.setAttribute("loginName", loginName);
-					System.out.println("session:"+session.getAttribute("loginName"));
-					response.sendRedirect("index.jsp");	
-					//request.getRequestDispatcher("error.jsp").forward(request,response);
-				}
+				chatList = c.selectChat(((String)request.getParameter("id")).trim(), (String)session.getAttribute("loginName"));
 				
-				else
-				{
-					PrintWriter pw = response.getWriter();
-					pw.println("<script>alert('用户名或密码错误，请检查'); location.href='../../UsedCar/login.jsp';</script>");
-				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			 pw.print("{\"data\":[");
+			 int i = 0;
+			for(Chat chat:chatList)
+			{	
+				pw.print("{\"time\":\""+chat.getTime().trim()+"\", \"from\":\""+chat.getFromId().trim()+"\", \"to\":\""+chat.getToId().trim()+"\", \"content\":\""+chat.getChatContent().trim()+"\"}");	
+				if (i!= chatList.size()-1) {
+					pw.print(",");
+				}
+				i++;
+				System.out.print(chatList.size());	
+			    
+			}
 			
+			//request.setAttribute("chatList", chatList);
+			//request.getRequestDispatcher("error.jsp").forward(request, response);
+			 pw.print("]}");
 	}
 
 	

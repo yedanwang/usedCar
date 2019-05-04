@@ -184,7 +184,8 @@ footer{
 		for(Car car:carList){
 			String picSrc = "upload/"+car.getName().trim()+"_carImg.jpg";
 			%>
-			<div class="car-content-detail hover-to-pointer hover-to-shadow">
+			<div class="car-content-detail hover-to-pointer hover-to-shadow"
+			onclick="window.open('carDetail.jsp?id=<% out.write(String.valueOf(car.getId())); %>')">
 				<img src="<% out.write(picSrc); %>"/>
 				<div class="car-content-detail-text">
 					<% out.write(car.getCar_brand()); %>
