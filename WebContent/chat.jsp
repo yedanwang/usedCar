@@ -49,12 +49,14 @@ a:visited{
 .a-chat{
 	padding: 5px 0;
 	margin: 10px 0;
+	overflow: hidden;
 }
 .chat-history{
 	padding: 10px;
 	height: 500px;
 	background: #eee;
 	border-radius: 10px;
+	overflow: auto;
 }
 .chat-time{
 	text-align: center;
@@ -152,6 +154,7 @@ a:visited{
 	<div id="body">
 		<div class="chat">
 			<div class="chat-history">
+				<!-- 
 				<div class="a-chat">
 					<div class="chat-time">
 						<span style="background: rgb(218, 218, 218); padding: 2px 10px; border-radius: 5px; color: #fff;">2019-10-15 12:30:25</span>
@@ -168,7 +171,7 @@ a:visited{
 						</div>
 					</div>
 				</div>
-				
+				 -->
 			</div>
 			<div class="new-chat">
 				<input class="new-chat-text" placeholder="请输入内容" id="new-chat-text" />
@@ -182,6 +185,9 @@ a:visited{
 let user = $('#welcome').html()
 user = user.split('：')[1].trim()
 
+let url = window.location.href;
+let toUser = decodeURI(url.split('=')[1])
+
 document.onkeydown=function(event){
      var e = event || window.event || arguments.callee.caller.arguments[0];      
      if(e && e.keyCode==13){ // enter 键
@@ -191,7 +197,8 @@ document.onkeydown=function(event){
 }
 
 window.onload = function () {
-	selectChat();
+	selectChat()
+	setInterval("selectChat()", 10000)
 }
 
 function sendMessage() {
@@ -217,13 +224,26 @@ function sendMessage() {
 	let newMessageDom = $('<div class="a-chat"><div class="chat-time"><span style="background: rgb(218, 218, 218); padding: 2px 10px; border-radius: 5px; color: #fff;">'+time+'</span></div><div class="chat-body"><div class="left header" style="display: none;">'+me+'</div><div class="chat-content text-right"><span class="chat-content-text">'+val+'</span></div><div class="right header">'+me+'</div></div></div>')
 	$(".chat-history").append(newMessageDom)
 	$("#new-chat-text").val('')
+	$.ajax({
+		url:'InsertChatServlet',
+		type: 'POST',
+		data:{to: toUser, content: val},
+		success:function(res) {
+			if (res != 1){
+				alert('插入失败')
+			}
+		},
+		error:function(err) {
+			console.log('网络错误')
+		}
+	})
 }
 
 function selectChat() {
 	$.ajax({
 		url: 'selectChatServlet',
 		method: 'post',
-		data: {id: '齐昊宇'},
+		data: {id: toUser},
 		success: function(res) {
 			selectToDom(res.data)
 		},

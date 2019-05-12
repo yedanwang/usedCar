@@ -196,7 +196,7 @@ a:visited{
 					</div>
 					<div style="margin-top: 25px; overflow: hidden;">
 						<div class='left half phone big-button'><i class="fas fa-phone"></i><% out.write(car.getIphone()); %></div>
-						<div class='left half chat big-button'><i class="far fa-comment-dots"></i>微聊</div>
+						<div class='left half chat big-button' onclick="window.open('chat.jsp?to=<% out.write(car.getName());  %>')"><i class="far fa-comment-dots"></i>微聊</div>
 					</div>
 					<div class="sell">
 						<div><span class="sell-title">卖家：</span><% out.write(car.getName()); %></div>

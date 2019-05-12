@@ -37,4 +37,21 @@ public class SqlSelectChat {
 		return ChatList;			
 }
 
+	public List selectUnReadChat(String str) throws SQLException {
+		Connection conn = Te.conn;
+		String sql = "SELECT from_id,max(time) AS time FROM chat where status = '0' and to_id = '"+str+"'  group by from_id ";
+		System.out.print(sql);
+		Statement statement;
+		statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		Vector<Chat> chatList = new Vector<Chat>(); ;
+		while(rs.next()) 
+		{
+			Chat chat = new Chat();
+			chat.setTime(rs.getString(2));
+			chat.setFromId(rs.getString(1));
+			chatList.add(chat);;
+		}	
+		return chatList;			
+	}
 }
