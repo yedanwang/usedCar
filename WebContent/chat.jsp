@@ -182,7 +182,7 @@ document.onkeydown=function(event){
 window.onload = function () {
 	selectChat()
 	setInterval("selectChat()", 10000)
-	let to = location.href.split("=")[1]
+	let to = decodeURI(location.href.split("=")[1])
 	document.title = `与`+to+`沟通中`
 	setTimeout(toBottom, 100)
 }
@@ -193,6 +193,11 @@ function toBottom(){
 }
 
 function sendMessage() {
+	let val = $("#new-chat-text").val().trim()
+	if (val === '') {
+		alert('请勿发送空消息');
+		return
+	}
 	let time = new Date()
 	let year = time.getFullYear()
 	let month = time.getMonth() + 1
@@ -211,7 +216,6 @@ function sendMessage() {
 	}
 	time = year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec
 	let me = user
-	let val = $("#new-chat-text").val()
 	let newMessageDom = $('<div class="a-chat"><div class="chat-time"><span style="background: rgb(218, 218, 218); padding: 2px 10px; border-radius: 5px; color: #fff;">'+time+'</span></div><div class="chat-body"><div class="left header" style="display: none;">'+me+'</div><div class="chat-content text-right"><span class="chat-content-text">'+val+'</span></div><div class="right header">'+me+'</div></div></div>')
 	$(".chat-history").append(newMessageDom)
 	$("#new-chat-text").val('')
