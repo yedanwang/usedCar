@@ -131,7 +131,7 @@ a:visited{
 	color: #ff552e;
 	font-size: 20px;
 }
-#mycar{
+#mymessage{
 	display: none;
 }
 .a-chat{
@@ -165,20 +165,42 @@ a:visited{
 .hidden{
 	display: none;
 }
+.disabled{
+	background: #ccc;
+	cursor: not-allowed;
+}
+.no-car{
+	text-align: center;
+	color: #ff0000;
+	margin-top: 50px;
+	border: 5px dotted #000;
+	border-radius: 20px;
+	padding: 30px 0;
+	letter-spacing: 3px;
+}
+.no-car a{
+	font-size: 20px;
+	font-weight: blol;
+	color: #ff0000;
+	text-decoration: underline;
+}
 </style>
 </head>
 <body>
 <div id="page">
 	<div id="header">
-		<%if ((String)session.getAttribute("loginName") == null){%>
-		<a href="login.jsp"><span>登录</span></a> /
-			<a href="register.jsp"><span>注册</span></a> 
-		<% }else{%><span onclick="location.href='exit.jsp'">欢迎你：
+		<span style="position: relative; left: -1210px;" onclick="location.href='index.jsp'">首页</span>
+		<% System.out.println((String)session.getAttribute("loginName"));
+		if ((String)session.getAttribute("loginName") == null){
+			System.out.println((String)session.getAttribute("loginName"));
+			response.sendRedirect("login.jsp");
+			return;
+		 }else{%><span onclick="location.href='exit.jsp'">欢迎你：
 		<% 
 			String name = (String)session.getAttribute("loginName") ;
 		        out.print(name);}
 		%></span>
-		<span>个人中心</span>	
+			<span onclick="location.href='mine.jsp'">个人中心</span>	
 		<!-- <span>切换城市</span>	 -->
 		<a href="sale.jsp"><span>我要卖车</span></a>		
 	</div>
@@ -190,74 +212,94 @@ a:visited{
 			<div class="menu-head">
 				个人中心
 			</div>
-			<div class="menu-list">
+			<div class="menu-list" onclick="select('fabu')">
 				我的发布
 			</div>
-			<div class="menu-list">
+			<div class="menu-list" onclick="select('xiaoxi')">
 				我的消息
 			</div>
 		</div>
 		<div class="left container" id="mycar">
 			<span class="title-select">我的发布</span>
-			<div class="detail">
-				<div class="detail-title">
-					本田 CRV 2010款 2.0L 自动四驱经典版
-				</div>
+			<%
+		 SqlSelectCar t = new SqlSelectCar();
+       Car car = new Car();
+       car = null;
+		try {
+			car = t.selectMyCar((String)session.getAttribute("loginName"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}%>
+		<%System.out.println("car"+car);if(car == null){ %>
+			<div class="detail no-car ">
+				您暂时还没有上传车辆，快来<a href="sale.jsp">上传车辆</a>吧！
+			</div>
+			<%}else{%>
+			<div class="detail ">
 				<div class="detail-body">
 					<div style="text-align: center;">
-						<img src='upload/齐昊宇_carImg.jpg' width="600px">
-						<span class='orange price-desc'>￥</span><span class="orange price">价格</span><span class='orange price-desc'>万</span>
+					
+				<%String picSrc = "upload/"+car.getName().trim()+"_carImg.jpg";%>
+						<img src='<% out.write(picSrc); %>' width="600px">
+						<span class='orange price-desc'>￥</span><span class="orange price"><% out.write(String.valueOf(car.getPrice())); %></span><span class='orange price-desc'>万</span>
 					</div>
 					<div>
 						<div class='condition'>
 							<div style="overflow: hidden;">
 								<div class='condition-kuang'>
-									<div>里程</div>
+									<div><% out.write(String.valueOf(car.getMileage())); %></div>
 									<div class='condition-kuang-desc'>表显里程</div>
 								</div>
 								<div class='condition-kuang'>
-									<div>时间</div>
+									<div><% out.write(car.getBuy_time()); %></div>
 									<div class='condition-kuang-desc'>购买时间</div>
 								</div>
 								<div class='condition-kuang'>
-									<div>品牌</div>
+									<div><%out.write(car.getCar_brand()); %></div>
 									<div class='condition-kuang-desc'>品牌</div>
 								</div>
 								<div class='condition-kuang' style="border: none;">
-									<div>车上行</div>
+									<div>	<%out.write(car.getVehicle_type()); %></div>
 									<div class='condition-kuang-desc'>车型</div>
 								</div>
 							</div>
 							<div style='border-top: 1px solid #ccc; margin-top: 20px; padding: 10px;'>
-								<div>车辆描述：aaa</div>
-								<div><span class="sell-title">看车地址：</span>地址</div>
+								<div>车辆描述：<% out.write(car.getCondition()); %></div>
+								<div><span class="sell-title">看车地址：</span><% out.write(car.getAdress()); %></div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class='chat big-button' onclick=""><i class="far fa-trash-alt"></i>下架</div>
+				<%System.out.println(car.getStatus().trim()); %>
+				<div class='chat big-button <% if(car.getStatus().trim().equals("-1")) {
+					System.out.print("--------"+car.getStatus().trim().equals("-1"));
+						out.print("disabled");
+					}%>' onclick="cancle(this,'<%String name = (String)session.getAttribute("loginName") ; out.print(name.trim()); %>')"><i class="far fa-trash-alt"></i>下架</div>
 			</div>
+			<%} %>
 		</div>
 		<div class="left container" id="mymessage">
 			<span class="title-select">我的消息</span>
 			<div style="margin-top: 30px;">
 			<%
-		 SqlSelectChat t = new SqlSelectChat();
-        List<Chat> chatList = null;
-		try {
-			chatList = t.selectUnReadChat((String)session.getAttribute("loginName"));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 	SqlSelectChat a = new SqlSelectChat();
+        	List<Chat> chatList = null;
+			try {
+				chatList = a.selectAllpeopleChat((String)session.getAttribute("loginName"));//.selectUnReadChat((String)session.getAttribute("loginName"));
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
-		for(Chat chat:chatList){
-
+			for(Chat chat:chatList){
 			%>
-				<div class="a-chat" onclick="search()">
+				<div class="a-chat" onclick="search('<%out.write(chat.getFromId().trim());%>',this)">
 				<%out.write(chat.getFromId());  %>
-					<span class="badge ">new</span>
-					<span class="last-time"><%out.write(chat.getTime());  %></span>
+					<span class="badge <% if(chat.getStatus().trim().equals("1")) {
+						out.print("hidden");
+					}%>">new</span>
+					<span class="last-time"><%out.write(chat.getTime()); System.out.println(chat.getStatus().trim());%></span>
 				</div>
 				<%} %>
 				
@@ -265,6 +307,55 @@ a:visited{
 		</div>
 	</div>
 </div>
+<script src='static/js/jquery.min.js'></script>
+<script>
+let fabu = document.getElementsByClassName('container')[0];
+let xiaoxi = document.getElementsByClassName('container')[1];
 
+function search(tar, that){
+	window.open('chat.jsp?to=' + tar);
+	let element = that.getElementsByClassName('badge')[0]
+	addClass(element, 'hidden')
+}
+function hasClass( elements,cName ){ 
+  return !!elements.className.match( new RegExp( "(\\s|^)" + cName + "(\\s|$)") ); 
+}
+function addClass( elements,cName ){ 
+  if( !hasClass( elements,cName ) ){ 
+    elements.className += " " + cName; 
+  }; 
+}
+function select(tar){
+	fabu.style.display = 'none';
+	xiaoxi.style.display = 'none';
+	if (tar === 'fabu') {
+		fabu.style.display = 'block';
+	} else {
+		xiaoxi.style.display = 'block';
+	}
+}
+function cancle(that,tar){
+	if (that.className.indexOf('disabled') == '-1') {
+		$.ajax({
+			type: "post",
+			url: "updateCarStatusServlet",
+			data: {
+				"handle": 'off',
+				"id": tar
+			},
+			success: function(data) {
+				if (data == 1){
+					alert('下架成功');
+				} else {
+					alert('下架失败');
+				}
+			}
+		});
+	} else {
+		alert('无法重复下架');
+	}
+	
+}
+</script>
 </body>
 </html>

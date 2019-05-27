@@ -1,12 +1,12 @@
-package com.imut.javabean;
 
+package com.imut.javabean;
 public class Chat {
 	private String id ;
 	private String time;
 	private String from_id;
 	private String to_id;
 	private String chat_content;
-	
+	private String status;
 	   public String getId()
 	  	{
 	  		return id;
@@ -46,5 +46,13 @@ public class Chat {
 	      public void setChatContent( String content )
 	  	{
 	  		this.chat_content = content;
-	  	}        
+	  	}    
+	      public String getStatus()
+		  	{
+		  		return status;
+		  	}
+		      public void setStatus( String s )
+		  	{
+		  		this.status = s;
+		  	}    
 }

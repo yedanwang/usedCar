@@ -18,7 +18,7 @@
 </head>
 <body class="login_bj" >
 <div class="zhuce_body">
-	<div class="logo"><a href="#"><img src="images/headpicture.jpg" width="252" height="42" border="0"></a></div>
+	<div class="logo"><a href="index.jsp"><img src="images/headpicture.jpg" width="252" height="42" border="0"></a></div>
     <div class="zhuce_kong login_kuang">
     	<div class="zc">
         	<div class="bj_bai" style="width: 280px; height: 300px; margin-left: 90px;">

@@ -168,4 +168,32 @@ public class SqlSelectCar {
 	    }
 		return car;	
 }
+	public Car selectMyCar(String str) throws SQLException { //ÐèÒª¸Äsql
+		Connection conn = Te.conn;
+		String sql = "SELECT car.name,buy_time,vehicle_type,mileage,price,address,condition,phone,car_brand,id,status FROM car,users where users.name=car.name and users.name = '"+str+"'"; 
+		System.out.print(sql);
+		Statement statement;
+		statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		Car car = new Car();
+		int i = 0;
+		while(rs.next()) {
+			i++;
+			car.setName(rs.getString(1));
+			car.setBuy_time(rs.getString(2));
+			car.setVehicle_type(rs.getString(3));
+			car.setMileage(Float.parseFloat ( rs.getString(4)));
+			car.setPrice(Float.parseFloat( rs.getString(5)));
+			car.setAdress(rs.getString(6));
+			car.setCondition(rs.getString(7));
+			car.setIphone(rs.getString(8));
+			car.setCar_brand(rs.getString(9));
+			car.setId( Integer.parseInt(rs.getString(10)));		
+			car.setStatus(rs.getString(11));
+	    }
+		System.out.println("i="+i);
+		if(i==0)
+			car = null;
+		return car;	
+}
 }

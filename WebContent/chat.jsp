@@ -147,31 +147,14 @@ a:visited{
 	String name = (String)session.getAttribute("loginName") ;
         out.print(name);}
 %></span>
-			<span>个人中心</span>	
+			<span onclick="location.href='mine.jsp'">个人中心</span>	
 			<!-- <span>切换城市</span>	 -->
 			<a href="sale.jsp"><span>我要卖车</span></a>		
 		</div>
 	<div id="body">
 		<div class="chat">
 			<div class="chat-history">
-				<!-- 
-				<div class="a-chat">
-					<div class="chat-time">
-						<span style="background: rgb(218, 218, 218); padding: 2px 10px; border-radius: 5px; color: #fff;">2019-10-15 12:30:25</span>
-					</div>
-					<div class="chat-body">
-						<div class="left header">
-							忘
-						</div>
-						<div class="chat-content text-right">
-							<span class="chat-content-text">asdfffffghjkl</span>
-						</div>
-						<div class="right header">
-							了
-						</div>
-					</div>
-				</div>
-				 -->
+				
 			</div>
 			<div class="new-chat">
 				<input class="new-chat-text" placeholder="请输入内容" id="new-chat-text" />
@@ -199,6 +182,14 @@ document.onkeydown=function(event){
 window.onload = function () {
 	selectChat()
 	setInterval("selectChat()", 10000)
+	let to = location.href.split("=")[1]
+	document.title = `与`+to+`沟通中`
+	setTimeout(toBottom, 100)
+}
+
+function toBottom(){
+	let history = document.getElementsByClassName('chat-history')[0];
+	history.scrollTop = history.scrollHeight
 }
 
 function sendMessage() {
@@ -219,11 +210,12 @@ function sendMessage() {
 		hour = '0' + hour
 	}
 	time = year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec
-	let me = '王'
+	let me = user
 	let val = $("#new-chat-text").val()
 	let newMessageDom = $('<div class="a-chat"><div class="chat-time"><span style="background: rgb(218, 218, 218); padding: 2px 10px; border-radius: 5px; color: #fff;">'+time+'</span></div><div class="chat-body"><div class="left header" style="display: none;">'+me+'</div><div class="chat-content text-right"><span class="chat-content-text">'+val+'</span></div><div class="right header">'+me+'</div></div></div>')
 	$(".chat-history").append(newMessageDom)
 	$("#new-chat-text").val('')
+	toBottom()
 	$.ajax({
 		url:'InsertChatServlet',
 		type: 'POST',
@@ -251,7 +243,6 @@ function selectChat() {
 			console.log(err)
 		}
 	})
-	
 }
 
 function selectToDom (data) {

@@ -14,7 +14,7 @@ public class SqlInsertChat {
 		  
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         String time = String.valueOf(df.format(new Date()));// new Date()为获取当前系统时间
-		String sql = "insert into chat (time,from_id,to_id,chat_content) values ('"+time+"','"+from +"','"+to+"','"+content+"')";
+		String sql = "insert into chat (time,from_id,to_id,chat_content,status) values ('"+time+"','"+from +"','"+to+"','"+content+"','0')";
 		System.out.print(sql);
 		Statement statement;
 		Connection conn = Te.conn;

@@ -139,7 +139,7 @@ footer{
         out.print(name);}
 %></span>
 			
-			<span>个人中心</span>	
+			<span onclick="location.href='mine.jsp'">个人中心</span>	
 			<!-- <span>切换城市</span>	 -->
 			<a href="sale.jsp"><span>我要卖车</span></a>		
 		</div>

@@ -42,11 +42,12 @@ public class selectChatServlet extends HttpServlet {
 		response.setContentType("application/json;charset = utf-8");
 		HttpSession session = request.getSession();
 		SqlSelectChat c = new SqlSelectChat();
+		SqlUpdateChat update = new SqlUpdateChat();
 		 List<Chat> chatList = null;
 		 PrintWriter pw = response.getWriter();
 			try {
 				chatList = c.selectChat(((String)request.getParameter("id")).trim(), (String)session.getAttribute("loginName"));
-				
+				update.updateStatus(((String)request.getParameter("id")).trim(), (String)session.getAttribute("loginName"));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -67,6 +68,7 @@ public class selectChatServlet extends HttpServlet {
 			//request.setAttribute("chatList", chatList);
 			//request.getRequestDispatcher("error.jsp").forward(request, response);
 			 pw.print("]}");
+			 
 	}
 
 	

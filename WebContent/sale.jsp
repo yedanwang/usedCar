@@ -149,7 +149,12 @@
 			<tr>
 				<td><span class="required">*</span> 里程</td>
 				<td></td>
-				<td><input type="number" name="mileage" pattern="\d{0,}" required/>万公里</td>
+				<td><input type="number" name="mileage" pattern="\d{0,}" required onchange="changeGujia(this.value)"/>万公里</td>
+			</tr>
+			<tr id="gujia" style="display:none;">
+				<td></td>
+				<td></td>
+				<td>估价：<span id="about-price">15</span>万元</td>	
 			</tr>
 			<tr>
 				<td><span class="required">*</span> 价格</td>
@@ -182,6 +187,8 @@ Login Name:<% String name = (String)session.getAttribute("loginName") ;
 <script>
 let drivingBookImgInput = document.getElementsByName("drivingBookImg")[0];
 let drivingBookImgIcon = document.getElementById('drivingBook');
+let price = document.getElementById('gujia');
+let priceNum = document.getElementById('about-price');
 drivingBookImgIcon.onclick = function(){
 	drivingBookImgInput.click();
 }
@@ -219,6 +226,10 @@ carImgInput.onchange = function() {
 	reader.onload=function(e) {
 		carImgIcon.innerHTML = '<img src="'+e.target.result+'" width="96" height="90px"/>'
 	}
+}
+function changeGujia(mile){
+	gujia.style.display = 'table-row';
+	priceNum.innerHTML = 15 - mile*0.1;
 }
 </script>
 </html>
