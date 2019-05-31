@@ -16,7 +16,7 @@
         }
     </style>
 </head>
-<body class="login_bj" >
+<body class="admin_login_bj" >
 <div class="zhuce_body">
 	<div class="logo"><a href="#"><img src="images/headpicture.jpg" width="252" height="42" border="0"></a></div>
     <div class="zhuce_kong login_kuang">
@@ -27,13 +27,10 @@
                 <input name="loginName" type="text" class="kuang_txt phone" placeholder="用户名">
                 <input name="password" type="password" class="kuang_txt password" placeholder="密码">
                 <input name="登录" type="submit" class="btn_zhuce" value="登录">
-                </form>
-                <span style="margin-left:50px;margin-bottom: -20px;">没有账号？现在<span style="color: #37b5f9;" class="hover-to-pointer" onclick="location.href='register.jsp'">注册</span></span>
+                </form>	
             </div>
         </div>
-            <div style="margin-top: 350px;text-align:center; color: #fff;">欢迎使用 ssc车之家 二手车交易平台</div>
     </div>
-
 </div>
     
 </body>

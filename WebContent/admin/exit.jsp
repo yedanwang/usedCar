@@ -6,8 +6,7 @@
 </head>
 <body>
 <%
-session.setAttribute("loginName", null) ;
-
+session.setAttribute("AdminloginName", null) ;
 %>
 <script>
 	alert('退出成功');

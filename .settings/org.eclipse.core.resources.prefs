@@ -1,6 +1,9 @@
 eclipse.preferences.version=1
+encoding//WebContent/admin/admin-list.jsp=UTF-8
+encoding//WebContent/admin/member-list.jsp=UTF-8
 encoding//WebContent/admin/picture-list.jsp=UTF-8
 encoding//WebContent/admin/static/h-ui.admin/js/de_DE.txt=UTF-8
+encoding//WebContent/admin/user-list.jsp=UTF-8
 encoding//WebContent/carDetail.jsp=UTF-8
 encoding//WebContent/index.jsp=UTF-8
 encoding//WebContent/sale.jsp=UTF-8

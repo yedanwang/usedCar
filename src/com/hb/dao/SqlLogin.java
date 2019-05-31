@@ -23,7 +23,7 @@ public class SqlLogin {
 				{
 					System.out.print(rs.getString(1));
 					user.setName(rs.getString(1));
-					user.setPassword(rs.getString(1));;
+					user.setDark(rs.getString(3));
 					return user;
 					
 				}	
@@ -34,7 +34,7 @@ public class SqlLogin {
 	
 	public Users checkAdminLogin(String loginName,String password) throws SQLException {
 		Connection conn = Te.conn;
-		String sql = "SELECT * FROM admin where name = '"+loginName+"' and  password = '"+password+"'";
+		String sql = "SELECT * FROM admin where id = '"+loginName+"' and  password = '"+password+"'";
 		
 		    Users user = new Users();
 			System.out.print(sql);

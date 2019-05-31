@@ -1,4 +1,9 @@
-﻿<!DOCTYPE HTML>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.sql.*"%>
+<%@ page import="com.hb.dao.*"%>
+<%@ page import="com.imut.javabean.*"%>
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="utf-8">
@@ -24,56 +29,47 @@
 <title>管理员列表</title>
 </head>
 <body>
+<% SqlSelectUsersAndAdmin t = new SqlSelectUsersAndAdmin();
+List<admin> adminList = null;
+
+try {
+	adminList = t.selectAllAdmin();
+} catch (SQLException e) {
+	// TODO Auto-generated catch block
+	e.printStackTrace();
+}  %>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
-	<div class="text-c"> 日期范围：
-		<input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}' })" id="datemin" class="input-text Wdate" style="width:120px;">
-		-
-		<input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d' })" id="datemax" class="input-text Wdate" style="width:120px;">
-		<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="">
-		<button type="submit" class="btn btn-success" id="" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
-	</div>
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="admin_add('添加管理员','admin-add.html','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="admin_add('添加管理员','admin-add.html','700','450')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span>
 	<table class="table table-border table-bordered table-bg">
 		<thead>
 			<tr>
 				<th scope="col" colspan="9">员工列表</th>
 			</tr>
 			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="40">ID</th>
-				<th width="150">登录名</th>
-				<th width="90">手机</th>
-				<th width="150">邮箱</th>
+				<th width="200">登录名</th>
+				<th width="200">联系方式</th>
 				<th>角色</th>
-				<th width="130">加入时间</th>
-				<th width="100">是否已启用</th>
-				<th width="100">操作</th>
+				<th width="300">加入时间</th>
+				<th width="200">地址</th>
+				<th width="200">操作</th>
 			</tr>
 		</thead>
 		<tbody>
+		<%
+		for(admin admin:adminList){%>
+		
 			<tr class="text-c">
-				<td><input type="checkbox" value="1" name=""></td>
-				<td>1</td>
-				<td>admin</td>
-				<td>13000000000</td>
-				<td>admin@mail.com</td>
-				<td>超级管理员</td>
-				<td>2014-6-11 11:11:42</td>
-				<td class="td-status"><span class="label label-success radius">已启用</span></td>
-				<td class="td-manage"><a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用"><i class="Hui-iconfont">&#xe631;</i></a> <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+				<td class="uname"><%out.write(admin.getId()); %></td>
+				<td><%out.write(admin.getPhone()); %></td>
+				<td><%if(admin.getStatus().trim().equals("1"))
+						{out.write("超级管理员");}
+						else{out.write("普通管理员");} %></td>
+				<td><%out.write(admin.getTime()); %></td>
+				<td ><%out.write(admin.getAddress()); %></td>
+				<td class="td-manage"><a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
 			</tr>
-			<tr class="text-c">
-				<td><input type="checkbox" value="2" name=""></td>
-				<td>2</td>
-				<td>zhangsan</td>
-				<td>13000000000</td>
-				<td>admin@mail.com</td>
-				<td>栏目编辑</td>
-				<td>2014-6-11 11:11:42</td>
-				<td class="td-status"><span class="label radius">已停用</span></td>
-				<td class="td-manage"><a style="text-decoration:none" onClick="admin_start(this,'10001')" href="javascript:;" title="启用"><i class="Hui-iconfont">&#xe615;</i></a> <a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','2','800','500')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a> <a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-			</tr>
+		<%} %>	
 		</tbody>
 	</table>
 </div>
@@ -103,13 +99,20 @@ function admin_add(title,url,w,h){
 /*管理员-删除*/
 function admin_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
+		let uname = $(obj).parents("tr").find(".uname").html();
 		$.ajax({
 			type: 'POST',
-			url: '',
+			data: {id: uname},
+			url: '../AdminDeleteServlet',
 			dataType: 'json',
 			success: function(data){
-				$(obj).parents("tr").remove();
-				layer.msg('已删除!',{icon:1,time:1000});
+				if (data == 1) {
+					$(obj).parents("tr").remove();
+					layer.msg('已删除!',{icon:1,time:1000});	
+				} else if (data == 2) {
+					layer.msg('权限不足！',{icon:2, time: 1000});
+				}
+				
 			},
 			error:function(data) {
 				console.log(data.msg);
@@ -134,18 +137,6 @@ function admin_stop(obj,id){
 	});
 }
 
-/*管理员-启用*/
-function admin_start(obj,id){
-	layer.confirm('确认要启用吗？',function(index){
-		//此处请求后台程序，下方是成功后的前台处理……
-		
-		
-		$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-		$(obj).remove();
-		layer.msg('已启用!', {icon: 6,time:1000});
-	});
-}
 </script>
 </body>
 </html>

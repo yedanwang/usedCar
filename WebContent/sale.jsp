@@ -179,9 +179,6 @@
 <%if ((String)session.getAttribute("loginName") == null) {
 	request.getRequestDispatcher("login.jsp").forward(request, response);
 }%>
-Login Name:<% String name = (String)session.getAttribute("loginName") ;
-        out.print(name);
-%>
 
 </body>
 <script>

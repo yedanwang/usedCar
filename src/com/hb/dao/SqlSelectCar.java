@@ -14,7 +14,7 @@ public class SqlSelectCar {
 	public List selectALLCar() throws SQLException {
 		Connection conn = Te.conn;
 		String sql = "SELECT car.name,buy_time,vehicle_type,mileage,price,address,condition,phone,car_brand,id FROM car,users where users.name=car.name and status = '1'";
-			System.out.print(sql);
+			System.out.println(sql);
 			Statement statement;
 			
 				statement = conn.createStatement();
@@ -35,7 +35,7 @@ public class SqlSelectCar {
 					car.setIphone(rs.getString(8));
 					car.setCar_brand(rs.getString(9));
 					car.setId( Integer.parseInt(rs.getString(10)));
-					System.out.print("ID="+car.getId());
+					System.out.println("ID="+car.getId());
 					carList.add(car);
 				}	
 				
@@ -45,30 +45,8 @@ public class SqlSelectCar {
 
 	public List selectOrderCar(String str) throws SQLException {
 		Connection conn = Te.conn;
-		String sql = "SELECT * FROM car where status = '1' and vehicle_type like '%"+str+"%' or car_brand like '%"+str+"%'";
-		System.out.print(sql);
-		Statement statement;
-		statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery(sql);
-		Vector<Car> carList = new Vector<Car>(); ;
-		while(rs.next()) 
-		{
-			Car car = new Car();
-			car.setName(rs.getString(1));
-			car.setBuy_time(rs.getString(2));
-			car.setVehicle_type(rs.getString(3));
-			car.setMileage(Float.parseFloat ( rs.getString(4)));
-			car.setPrice(Float.parseFloat( rs.getString(5)));
-			car.setCondition(rs.getString(7));
-			car.setCar_brand(rs.getString(8));
-			carList.add(car);;
-		}	
-		return carList;			
-	}
-	
-	public List selectAllOrderCar() throws SQLException { //管理员查询所有在售车辆
-		Connection conn = Te.conn;
-		String sql = "SELECT car.name,buy_time,vehicle_type,mileage,price,condition,car_brand,address,phone FROM car,users where status = '1' and users.name=car.name";
+		String sql = "SELECT car.name,buy_time,vehicle_type,mileage,price,condition,car_brand,address,phone,car.id FROM car,users where users.name=car.name and status = '1'and (vehicle_type like '%"+str+"%' or car_brand like '%"+str+"%' or address like '%"+str+"%')";
+	//	String sql = "SELECT * FROM car where status = '1' and vehicle_type like '%"+str+"%' or car_brand like '%"+str+"%'";
 		System.out.print(sql);
 		Statement statement;
 		statement = conn.createStatement();
@@ -86,6 +64,33 @@ public class SqlSelectCar {
 			car.setCar_brand(rs.getString(7));
 			car.setAdress(rs.getString(8));
 			car.setIphone(rs.getString(9));
+			car.setId(Integer.parseInt(rs.getString(10)));
+			carList.add(car);;
+		}	
+		return carList;			
+	}
+	
+	public List selectAllOrderCar() throws SQLException { //管理员查询所有在售车辆
+		Connection conn = Te.conn;
+		String sql = "SELECT car.name,buy_time,vehicle_type,mileage,price,condition,car_brand,address,phone,car.id FROM car,users where status = '1' and users.name=car.name";
+		System.out.print(sql);
+		Statement statement;
+		statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		Vector<Car> carList = new Vector<Car>(); ;
+		while(rs.next()) 
+		{
+			Car car = new Car();
+			car.setName(rs.getString(1));
+			car.setBuy_time(rs.getString(2));
+			car.setVehicle_type(rs.getString(3));
+			car.setMileage(Float.parseFloat ( rs.getString(4)));
+			car.setPrice(Float.parseFloat( rs.getString(5)));
+			car.setCondition(rs.getString(6));
+			car.setCar_brand(rs.getString(7));
+			car.setAdress(rs.getString(8));
+			car.setIphone(rs.getString(9));
+			car.setId(Integer.parseInt(rs.getString(10)));
 			carList.add(car);;
 		}	
 		return carList;			

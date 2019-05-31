@@ -47,13 +47,17 @@ public class loginServlet extends HttpServlet {
 	        Users u;
 			try {
 				u = t.checkLogin(loginName, password);
-				if(u!=null)
+				if(u!=null&&u.getDarke().trim().equals("1"))
+				{
+					PrintWriter pw = response.getWriter();
+					pw.println("<script>alert('由于非法操作，该用户已被加入黑名单'); location.href='../../UsedCar/login.jsp';</script>");
+				}
+				if(u!=null&&u.getDarke().trim().equals("0"))
 				{
 					HttpSession session = request.getSession();
 					session.setAttribute("loginName", loginName);
 					System.out.println("session:"+session.getAttribute("loginName"));
 					response.sendRedirect("index.jsp");	
-					//request.getRequestDispatcher("error.jsp").forward(request,response);
 				}
 				
 				else

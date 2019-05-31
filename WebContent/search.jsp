@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>车辆搜索</title>
 <style>
 body{
 	margin: 0;
@@ -156,8 +156,9 @@ footer{
 		
 		for(Car car:carList){
 			String picSrc = "upload/"+car.getName().trim()+"_carImg.jpg";
+			
 			%>
-			<div class="car-content-detail hover-to-pointer hover-to-shadow" onclick="window.open('carDetail.jsp')">
+			<div class="car-content-detail hover-to-pointer hover-to-shadow" onclick="window.open('carDetail.jsp?id=<% out.write(Integer.toString(car.getId()));%>')">
 				<img src="<% out.write(picSrc); %>"/>
 				<div class="car-content-detail-text">
 					<% out.write(car.getCar_brand()); %>

@@ -54,7 +54,7 @@ public class SqlSelectChat {
 		return chatList;			
 	}
 	
-	public List selectAllpeopleChat(String id)throws SQLException{
+	public Vector selectAllpeopleChat(String id)throws SQLException{
 		Connection conn = Te.conn;
 		String sql = "select max(time) AS time ,from_id,min(status) AS status from chat where  to_id = '"+id+"' group by from_id ";
 		System.out.println(sql);
@@ -67,6 +67,24 @@ public class SqlSelectChat {
 			Chat chat = new Chat();
 			chat.setTime(rs.getString(1));
 			chat.setFromId(rs.getString(2));
+			chat.setStatus(rs.getString(3));
+			chatList.add(chat);;
+		}	
+		return chatList;	
+	}
+	public Vector selectAlltoChat(String id)throws SQLException{
+		Connection conn = Te.conn;
+		String sql = "select max(time) AS time ,to_id,min(status) AS status from chat where  from_id = '"+id+"' group by to_id ";
+		System.out.println(sql);
+		Statement statement;
+		statement = conn.createStatement();
+		ResultSet rs = statement.executeQuery(sql);
+		Vector<Chat> chatList = new Vector<Chat>(); 
+		while(rs.next()) 
+		{
+			Chat chat = new Chat();
+			chat.setTime(rs.getString(1));
+			chat.setToId(rs.getString(2));
 			chat.setStatus(rs.getString(3));
 			chatList.add(chat);;
 		}	

@@ -5,7 +5,7 @@ public class Users {
 	private String password;
 	private String name;
 	private String headimg;
-	private int dark;
+	private String dark;
 	private String phone;
 	private String address;
 	private String time;
@@ -25,11 +25,11 @@ public class Users {
 	{
 		  time = na;
 	 }
-	public int getDarke()
+	public String getDarke()
 	{
 		return dark;
 	}
-    public void setDark(int na)
+    public void setDark(String na)
 	{
 		  dark = na;
 	 }

@@ -190,7 +190,7 @@ a:visited{
 <div id="page">
 	<div id="header">
 		<span style="position: relative; left: -1210px;" onclick="location.href='index.jsp'">首页</span>
-		<% System.out.println((String)session.getAttribute("loginName"));
+		<% 
 		if ((String)session.getAttribute("loginName") == null){
 			System.out.println((String)session.getAttribute("loginName"));
 			response.sendRedirect("login.jsp");
@@ -284,9 +284,11 @@ a:visited{
 			<div style="margin-top: 30px;">
 			<%
 		 	SqlSelectChat a = new SqlSelectChat();
-        	List<Chat> chatList = null;
+        	Vector<Chat> chatList = null;
+        	Vector<Chat> chatListto = null;
 			try {
-				chatList = a.selectAllpeopleChat((String)session.getAttribute("loginName"));//.selectUnReadChat((String)session.getAttribute("loginName"));
+				chatList = a.selectAllpeopleChat((String)session.getAttribute("loginName"));
+				chatListto = a.selectAlltoChat((String)session.getAttribute("loginName"));//.selectUnReadChat((String)session.getAttribute("loginName"));
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -301,7 +303,25 @@ a:visited{
 					}%>">new</span>
 					<span class="last-time"><%out.write(chat.getTime()); System.out.println(chat.getStatus().trim());%></span>
 				</div>
-				<%} %>
+				<%}
+				   for(int i=0;i<chatList.size();i++)
+				    	for(int j=0;j<chatListto.size();j++)
+				    	{
+				    		if(chatListto.elementAt(j).getToId().equals(chatList.elementAt(i).getFromId()))
+				    		{
+				    			chatListto.remove(j);
+				    			j--;
+				    		}
+				    	}
+				for(Chat chat:chatListto){
+					  System.out.println("to"+chat.getToId().trim());
+					%>
+						<div class="a-chat" onclick="search('<%out.write(chat.getToId().trim());%>',this)">
+						<%out.write(chat.getToId());  %>
+							<span class="last-time"><%out.write(chat.getTime()); System.out.println(chat.getStatus().trim());%></span>
+						</div>
+						<%} 				
+				%>
 				
 			</div>
 		</div>

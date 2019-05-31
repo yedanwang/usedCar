@@ -66,7 +66,7 @@ public class loginAdminServlet extends HttpServlet {
 		response.setContentType("text/html;charset = utf-8");
 		    String loginName = request.getParameter("loginName").trim();
 	        String password = request.getParameter("password");
-	     System.out.println("用户名和密码分别为："+loginName+","+password);
+	        System.out.println("用户名和密码分别为："+loginName+","+password);
 	        SqlLogin t = new SqlLogin();
 	        Users u;
 			try {
@@ -74,16 +74,16 @@ public class loginAdminServlet extends HttpServlet {
 				if(u!=null)
 				{
 					HttpSession session = request.getSession();
-					session.setAttribute("loginName", loginName);
-					System.out.println("session:"+session.getAttribute("loginName"));
-					response.sendRedirect("adminIndex.jsp");	
+					session.setAttribute("AdminloginName", loginName);
+					System.out.println("session:"+session.getAttribute("AdminloginName"));
+					response.sendRedirect("./admin/index.jsp");	
 					//request.getRequestDispatcher("error.jsp").forward(request,response);
 				}
 				
 				else
 				{
 					PrintWriter pw = response.getWriter();
-					pw.println("<script>alert('用户名或密码错误，请检查'); location.href='../../UsedCar/login.jsp';</script>");
+					pw.println("<script>alert('用户名或密码错误，请检查'); location.href='../../UsedCar/adminLogin.jsp';</script>");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block

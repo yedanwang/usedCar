@@ -139,10 +139,11 @@ a:visited{
 <body>
 <div id="page">
 	<div id="header">
-		<%if ((String)session.getAttribute("loginName") == null){%>
-		<a href="login.jsp"><span>登录</span></a> /
-			<a href="register.jsp"><span>注册</span></a> 
-		<% }else{%><span id="welcome" onclick="location.href='exit.jsp'">欢迎你：
+		<%if ((String)session.getAttribute("loginName") == null){
+			System.out.println((String)session.getAttribute("loginName"));
+			response.sendRedirect("login.jsp");
+			return;
+		 }else{%><span id="welcome" onclick="location.href='exit.jsp'">欢迎你：
 <% 
 	String name = (String)session.getAttribute("loginName") ;
         out.print(name);}
@@ -215,7 +216,7 @@ function sendMessage() {
 		hour = '0' + hour
 	}
 	time = year + '-' + month + '-' + date + ' ' + hour + ':' + min + ':' + sec
-	let me = user
+	let me = user[0]
 	let newMessageDom = $('<div class="a-chat"><div class="chat-time"><span style="background: rgb(218, 218, 218); padding: 2px 10px; border-radius: 5px; color: #fff;">'+time+'</span></div><div class="chat-body"><div class="left header" style="display: none;">'+me+'</div><div class="chat-content text-right"><span class="chat-content-text">'+val+'</span></div><div class="right header">'+me+'</div></div></div>')
 	$(".chat-history").append(newMessageDom)
 	$("#new-chat-text").val('')

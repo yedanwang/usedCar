@@ -69,17 +69,17 @@ import com.imut.javabean.Users;
 		        String address = request.getParameter("address");
 		        SqlRegister r = new SqlRegister();
 				try {
+					PrintWriter pw = response.getWriter();
 					if(r.IsRegister(loginName, password, phone, address))
 					{
 						HttpSession session = request.getSession();
-						session.setAttribute("loginName", loginName);
-						PrintWriter pw = response.getWriter();
+						session.setAttribute("loginName", loginName);		
 						pw.println("<script>alert('注册成功'); location.href='../../UsedCar/index.jsp';</script>");
 					}
 					
 					else
 					{
-					    response.sendRedirect("error.jsp");
+						pw.println("<script>alert('用户名已存在'); location.href='../../UsedCar/register.jsp';</script>");
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block

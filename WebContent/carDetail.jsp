@@ -150,7 +150,7 @@ a:visited{
 		<a href="sale.jsp"><span>我要卖车</span></a>		
 	</div>
 	<%
-		 SqlSelectCar t = new SqlSelectCar();
+	   SqlSelectCar t = new SqlSelectCar();
        Car car = new Car();
 		try {
 			String path = request.getQueryString();
@@ -160,9 +160,6 @@ a:visited{
 			e.printStackTrace();
 		}%>
 	<div class="detail">
-		<div class="detail-title">
-			本田 CRV 2010款 2.0L 自动四驱经典版
-		</div>
 		<div class="detail-body">
 			<div class="detail-body-left">
 			<%String picSrc = "upload/"+car.getName().trim()+"_carImg.jpg";%>

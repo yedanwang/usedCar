@@ -84,6 +84,26 @@
 </servlet-mapping>
 
 <servlet>				   <!-- 定义servlet -->
+	<servlet-name>UsersDarkServlet</servlet-name>	   <!-- 与servlet-mapping对应 -->
+	<servlet-class>	org.servlet.UsersDarkServlet</servlet-class>	
+   </servlet>
+<servlet-mapping>			     <!-- 映射路径 -->
+	<servlet-name>UsersDarkServlet</servlet-name>	     <!-- 与servlet相对应 -->
+	<url-pattern>/UsersDarkServlet</url-pattern>   <!-- 页面的映射路径 -->
+</servlet-mapping>
+
+
+<servlet>				   <!-- 定义servlet -->
+	<servlet-name>AdminDeleteServlet</servlet-name>	   <!-- 与servlet-mapping对应 -->
+	<servlet-class>	org.servlet.AdminDeleteServlet</servlet-class>	
+   </servlet>
+<servlet-mapping>			     <!-- 映射路径 -->
+	<servlet-name>AdminDeleteServlet</servlet-name>	     <!-- 与servlet相对应 -->
+	<url-pattern>/AdminDeleteServlet</url-pattern>   <!-- 页面的映射路径 -->
+</servlet-mapping>
+
+
+<servlet>				   <!-- 定义servlet -->
 	<servlet-name>updateCarStatusServlet</servlet-name>	   <!-- 与servlet-mapping对应 -->
 	<servlet-class>	org.servlet.updateCarStatusServlet</servlet-class>	
    </servlet>
@@ -93,5 +113,12 @@
 </servlet-mapping>
 
 
-
+<servlet>				   <!-- 定义servlet -->
+	<servlet-name>adminRegisterServlet</servlet-name>	   <!-- 与servlet-mapping对应 -->
+	<servlet-class>	org.servlet.adminRegisterServlet</servlet-class>	
+   </servlet>
+<servlet-mapping>			     <!-- 映射路径 -->
+	<servlet-name>adminRegisterServlet</servlet-name>	     <!-- 与servlet相对应 -->
+	<url-pattern>/adminRegisterServlet</url-pattern>   <!-- 页面的映射路径 -->
+</servlet-mapping>
 </web-app>

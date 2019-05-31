@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.hb.dao.SelectAdminGrand;
 import com.hb.dao.SqlLogin;
 import com.hb.dao.SqlRegister;
 import com.imut.javabean.Users;
@@ -63,22 +64,30 @@ import com.imut.javabean.Users;
 				throws ServletException, IOException {
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("text/html;charset = utf-8");
-			    String loginName = request.getParameter("loginName").trim();
+			    String loginName = request.getParameter("adminName").trim();
 		        String password = request.getParameter("password");
-		     
+		        String phone = request.getParameter("phone");
+		        String address = request.getParameter("address");
+		        String status = request.getParameter("adminRole");
+		        HttpSession session = request.getSession();
+				SelectAdminGrand g = new SelectAdminGrand();
 		        SqlRegister r = new SqlRegister();
 				try {
-					if(r.IsAdminRegister(loginName, password))
+					PrintWriter pw = response.getWriter();
+					if(g.selectAdminGrand((String)session.getAttribute("AdminloginName")).equals("1")) 
 					{
-						HttpSession session = request.getSession();
-						session.setAttribute("loginName", loginName);
-						PrintWriter pw = response.getWriter();
-						pw.println("<script>alert('×¢²á³É¹¦'); location.href='../../UsedCar/index.jsp';</script>");
+					   if(r.IsAdminRegister(loginName, password,phone,address,status))
+					  {
+						pw.println("1");
+					  }
+				    	else
+					  {
+						pw.println("0");
+					  }
 					}
-					
 					else
 					{
-					    response.sendRedirect("error.jsp");
+						pw.println("2");
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
